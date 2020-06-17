@@ -1,7 +1,7 @@
 import React from 'react';
 import pizzaLanding from '../assets/pizza.jpg'
 import Typography from '@material-ui/core/Typography';
-import {Grid,useMediaQuery, Menu,MenuItem} from '@material-ui/core';
+import {Grid,useMediaQuery} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import pizza from '../assets/MenuLinkItem/pizza.jpg';
@@ -122,7 +122,7 @@ function Homepage(){
         <Grid container className={classes.container} spacing={3}>
         
            <Grid item xs={12} md={4}><Link to="/menu/pizza"> <div style={{backgroundImage:`url(${pizza}`}}className={classes.menupics}><p className={classes.menuitems}>Pizza</p></div></Link></Grid>
-           <Grid item xs={12} md={4}><Link to="/menu/deserts"><div style={{backgroundImage:`url(${desserts}`}}className={classes.menupics} ><p className={classes.menuitems}>Desserts</p></div></Link></Grid>
+           <Grid item xs={12} md={4}><Link to="/menu/desserts"><div style={{backgroundImage:`url(${desserts}`}}className={classes.menupics} ><p className={classes.menuitems}>Desserts</p></div></Link></Grid>
            <Grid item xs={12} md={4}><Link to="/menu/sides"><div style={{backgroundImage:`url(${sides}`}}className={classes.menupics} ><p className={classes.menuitems}>Sides</p></div></Link></Grid>
            <Grid item xs={12} md={4}><Link to="/menu/pasta"><div style={{backgroundImage:`url(${pasta}`}}className={classes.menupics} ><p className={classes.menuitems}>Pasta</p></div></Link></Grid>
            <Grid item xs={12} md={4}><Link to="/menu/drinks"><div style={{backgroundImage:`url(${drinks}`}}className={classes.menupics} ><p className={classes.menuitems}>Drinks</p></div></Link></Grid>

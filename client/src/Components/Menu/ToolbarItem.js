@@ -37,7 +37,7 @@ const useStyles = makeStyles(theme=>({
       }));
 
 
-function MenuItem(props){
+function ToolbarItem(props){
     const classes = useStyles();
     const {addCart} = useStore();
     
@@ -78,4 +78,4 @@ function MenuItem(props){
     );
 }
 
-export default MenuItem;
+export default ToolbarItem;

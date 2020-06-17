@@ -3,7 +3,7 @@ import { useQuery } from '@apollo/react-hooks';
 import {GET_FOODS, FILTER_FOOD} from '../../graphql/query';
 import { CircularProgress,Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import MenuItems from './MenuItem';
+import ToolbarItems from './ToolbarItem';
 
 
 
@@ -19,7 +19,7 @@ const useStyles = makeStyles(theme=>({
 
 
 
-function Menu(props){
+function Toolbar(props){
 
   const classes = useStyles();
   
@@ -60,7 +60,7 @@ function Menu(props){
         <Grid container spacing={3}>
        { data.filterFood.map((foods,i)=>(
         
-        <Grid item xs={12} md={4}>  <MenuItems key={foods.id} data={foods} /> </Grid>
+        <Grid item xs={12} md={4}>  <ToolbarItems key={foods.id} data={foods} /> </Grid>
           
        ))
        }
@@ -70,4 +70,4 @@ function Menu(props){
   
 }
 
-export default Menu;
+export default Toolbar;

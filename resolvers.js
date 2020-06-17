@@ -79,7 +79,7 @@ Mutation:{
         
 
         if(!user||!(await user.comparepasswords(password,user.password))) {
-            return next (new Error('Incorret email or password',401));
+            return(new Error('Incorret email or password',401));
         }
         
 
@@ -118,7 +118,7 @@ Mutation:{
             
             await newUser.save();
             const token=signintoken(newUser);
-            
+           
             return {token}
         }
         catch(err){

@@ -12,15 +12,18 @@ const typeDefs = require('./typeDefs');
 const resolvers = require('./resolvers');
 const isAuth = require('./middleware/auth');
 const User = require('./models/User')
-const {signintoken} = require('./resolvers');
 
 
+app.use( cors({origin:"http://localhost:3000",credentials:true}) );
 app.use('/refreshtoken', cookieParser());
 app.use(isAuth);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
 
-app.use( '*',cors() );
+app.use( cors({
+  origin:"http://localhost:3000",
+  credentials:true
+}) );
 
 
  app.post("/refreshtoken", async (req,res)=>{
@@ -58,13 +61,14 @@ mongoose.connect(process.env.DATABASE, {
     typeDefs,
     resolvers,
     context: ({ req, connection,res }) => ({
+      
       token: req ? req.headers.authorization : connection.context.authorization,
       res
     }),
    
   });
   
-  server.applyMiddleware({app, path: '/graphql'});
+  server.applyMiddleware({app, path: '/graphql',cors:false});
 
   app.listen(port,()=>{
       console.log('App is running');

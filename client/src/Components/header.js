@@ -1,4 +1,5 @@
 import React,{useState,useEffect} from 'react';
+import { withRouter } from 'react-router-dom';
 import AppBar from '@material-ui/core/AppBar';
 import ToolBar from '@material-ui/core/Toolbar';
 import TextField from '@material-ui/core/TextField';
@@ -6,8 +7,12 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import { makeStyles } from '@material-ui/core/styles';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
+import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
 import {Link} from 'react-router-dom';
 import Logo from '../assets/pizzapalacelogo.png';
+import {useStore} from '../context/token'
 
 
 const useStyles = makeStyles(theme=>({
@@ -37,6 +42,8 @@ const useStyles = makeStyles(theme=>({
         letterSpacing:"1.1px",
         fontSize:"1rem",
         fontFamily:"oxygen",
+        display: 'flex',
+        alignItems: 'center'
         
     },
     miniToolbar:{
@@ -55,49 +62,150 @@ const useStyles = makeStyles(theme=>({
       color:"red",
       backgroundColor:"white",
       marginLeft:"7.8rem"
+    },
+
+    menu:{
+      
+      color:"#650E15",
+      borderRadius:"0px",
+      backgroundColor: 	"#f2aa3a"
+    },
+    menuItem:{
+      ...theme.typography.tab,
+      width:"200px",
+      opacity:0.7,
+      "&hover":{
+        opacity:{
+          opacity:1
+        }
+      }
     }
 
 
   }));
 
-  function Header() {
+  function Header(props) {
+    
    
     const classes = useStyles();
     const [value, setValue] = useState(0);
-    //const [anchor, setAnchor] = useState(null);
-    //const [open,setOpen] = useState(false);
+    const [anchorEl, setAnchorEl] = useState(null);
+    const [openMenu, setOpenMenu] = useState(false);
+    const [selectedIndex, setSelectedIndex] = useState(0);
+    const {token,signout} = useStore();
+
+  
+    
+    
 
     const handleChange = (event, newValue) => {
       setValue(newValue);
     };
 
-    //const handleOpen = (e)=>{
-      //setAnchor(e.current.target);
-      //setOpen(true);
-    //};
+    const handleOpen = (e)=>{
+      setAnchorEl(e.currentTarget);
+      setOpenMenu(true);
+    };
 
-    //const handleClose=(e)=>{
-      //setAnchor(null);
-      //setOpen(false);
-    //}
+    const handleMenuItemClick = (e, i) => {
+      setAnchorEl(null);
+      setOpenMenu(false);
+      setSelectedIndex(i);
+    };
+
+    const handleClose=(e)=>{
+      setAnchorEl(null);
+      setOpenMenu(false);
+    }
   
-    const routes=[{name:"Menu",link:"/Menu", activeIndex:0},{name:"Deals",link:"/Deals",activeIndex:1},{name:"Sign Up",link:"/signup",activeIndex:2},{name:"Sign in", link:"/signin",activeIndex:3}]
    
+    
+    const menuList =[
+      {
+        name:"Pizza",
+        link:"/menu/pizza",
+        activeIndex:0,
+        selectedIndex:0
+      },
+      {
+        name:"Desserts",
+        link:"/menu/desserts",
+        activeIndex:0,
+        selectedIndex:1
+      },
+      {
+        name:"Sides",
+        link:"/menu/sides",
+        activeIndex:0,
+        selectedIndex:2
+      },
+      {
+        name:"Pasta",
+        link:"/menu/pasta",
+        activeIndex:0,
+        selectedIndex:3
+      },
+      {
+        name:"Drinks",
+        link:"/menu/drinks",
+        activeIndex:0,
+        selectedIndex:4
+      },
+      {
+        name:"Wings",
+        link:"/menu/wings",
+        activeIndex:0,
+        selectedIndex:5
+      }
+    ];
+    
+    const routes=[
+      {
+        name: "Menu",
+        activeIndex: 1,
+        ariaOwns: anchorEl ? "simple-menu" : undefined,
+        ariaPopup: anchorEl ? "true" : undefined,
+        mouseOver: event => handleOpen(event)
+      },
+      { name: "Deals", link: "/deals", activeIndex: 2 },
+      { name: "SignUp", link: "/signup", activeIndex: 3 },
+      { name: "SignIn", link: "/signin", activeIndex: 4 }
+    
+    
+    
+    
+    ]
+    
+    
     useEffect(()=>{
-        [...routes].forEach(route=>{
-            switch(window.location.pathname){
-                case`${route.link}`:
+      [...menuList, ...routes].forEach(route => {
+        switch (window.location.pathname) {
+          case `${route.link}`:
                 if(value!== route.activeIndex){
                     setValue(route.activeIndex)
-                    
+                    if(route.selectedIndex && route.selectedIndex!==selectedIndex){
+                      setSelectedIndex(route.selectedIndex);
+                    }
                   }
               break;
               default:
               break;
             }
         })
-    },[value,routes])
+    },[value,menuList,routes,selectedIndex])
    
+
+    async function signouthandler(){
+      try{
+        await signout()
+        props.history.push('/')
+      }
+      catch(err){
+        throw(err);
+      }
+      
+      
+    }
    
     return (
       <>
@@ -106,11 +214,30 @@ const useStyles = makeStyles(theme=>({
         <img alt="pizza logo"  className={classes.image} src={Logo}/>
         <Tabs value={value}  onChange={handleChange} className={classes.tabsContainer} indicatorColor="primary">
             
-            <Tab className={classes.tab} component={Link} to='/menu' label="Menu"/>,
+            <Tab className={classes.tab} component={Link} to='/menu' label={<div> Menu <ArrowDropDownIcon style={{verticalAlign: 'middle'}} /> </div>} aria-owns={anchorEl ? "simple-menu" : undefined} aria-haspopup={anchorEl ? "true" : undefined} onMouseOver={event => handleOpen(event)}/>
             <Tab className={classes.tab} component={Link} to='/deals' label="Deals"/>,
             
-            <Tab className={classes.tab} component={Link} to='/signup'label="Sign Up"/>,
-            <Tab className={classes.tab} component={Link} to='/signin'label="Sign In"/>
+     
+
+            {
+
+             (token)?(
+    
+                <Tab className={classes.tab} label="Sign Out" onClick={signouthandler} />
+      
+                  ):(
+                  [
+                  <Tab className={classes.tab} component={Link} to='/signup'label="Sign Up"/>,
+                  <Tab className={classes.tab} component={Link} to='/signin'label="Sign In"/>
+
+                  ]
+
+                  )
+
+                }
+          
+      
+        
         </Tabs> 
         </ToolBar>
        </AppBar>
@@ -124,10 +251,40 @@ const useStyles = makeStyles(theme=>({
     className={classes.textFied}
   />
   <ShoppingCartIcon/>
-      
+ 
      </ToolBar>
+     <Menu
+        id="simple-menu"
+        anchorEl={anchorEl}
+        open={openMenu}
+        onClose={handleClose}
+        classes={{ paper: classes.menu }}
+        MenuListProps={{
+          onMouseLeave: handleClose
+        }}
+        elevation={0}
+        
+        
+      >
+        {menuList.map((option, i) => (
+          <MenuItem
+            key={`${option}${i}`}
+            component={Link}
+            to={option.link}
+            classes={{ root: classes.menuItem }}
+            onClick={event => {
+              handleMenuItemClick(event, i);
+              setValue(1);
+              handleClose();
+            }}
+            selected={i === selectedIndex && value === 1}
+          >
+            {option.name}
+          </MenuItem>
+        ))}
+      </Menu>
       </>
     );
   }
   
-  export default Header;
+  export default withRouter(Header);

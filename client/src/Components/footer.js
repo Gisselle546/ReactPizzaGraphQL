@@ -14,6 +14,7 @@ const useStyles =  makeStyles(theme=>({
     fontSize:"15px",
     lineHeight:"24px",
     color:"#737373",
+    width:"100%"
    
     
    
