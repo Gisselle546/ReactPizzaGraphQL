@@ -6,13 +6,13 @@ import TextField from '@material-ui/core/TextField';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import { makeStyles } from '@material-ui/core/styles';
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import {Link} from 'react-router-dom';
 import Logo from '../assets/pizzapalacelogo.png';
-import {useStore} from '../context/token'
+import {useStore} from '../context/token';
+import MiniHeader from './miniheader';
 
 
 const useStyles = makeStyles(theme=>({
@@ -93,7 +93,7 @@ const useStyles = makeStyles(theme=>({
     const [openMenu, setOpenMenu] = useState(false);
     const [selectedIndex, setSelectedIndex] = useState(0);
     const {token,signout} = useStore();
-
+    
   
     
     
@@ -206,12 +206,14 @@ const useStyles = makeStyles(theme=>({
       
       
     }
+
+    
    
     return (
       <>
        <AppBar position="fixed" color="primary">
         <ToolBar> 
-        <img alt="pizza logo"  className={classes.image} src={Logo}/>
+        <img alt="pizza logo"  className={classes.image} style={{cursor:"pointer"}}src={Logo} onClick={()=>props.history.push('/')} />
         <Tabs value={value}  onChange={handleChange} className={classes.tabsContainer} indicatorColor="primary">
             
             <Tab className={classes.tab} component={Link} to='/menu' label={<div> Menu <ArrowDropDownIcon style={{verticalAlign: 'middle'}} /> </div>} aria-owns={anchorEl ? "simple-menu" : undefined} aria-haspopup={anchorEl ? "true" : undefined} onMouseOver={event => handleOpen(event)}/>
@@ -250,7 +252,7 @@ const useStyles = makeStyles(theme=>({
     color="secondary"
     className={classes.textFied}
   />
-  <ShoppingCartIcon/>
+  <MiniHeader/>
  
      </ToolBar>
      <Menu
