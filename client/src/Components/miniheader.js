@@ -2,10 +2,17 @@ import React from 'react';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import {useStore} from '../context/cart'
 import { makeStyles } from '@material-ui/core/styles';
+import {Link} from 'react-router-dom'
 
 const useStyles = makeStyles(theme=>({
     root:{
         
+    },
+    quantity:{
+        borderRadius:"100px",
+        backgroundColor:"#ce0018",
+        padding:"4px"
+
     }
    
 }));
@@ -22,7 +29,7 @@ function MiniHeader(){
 
 return(
     <>
-      <div> <div>{quantity}</div> <ShoppingCartIcon style={{verticalAlign: 'middle'}} /> </div>
+      <div> <div  className={classes.quantity}>{quantity}</div> <Link to="/cart"> <ShoppingCartIcon style={{verticalAlign: 'middle', size:"medium", color:"white" }} /></Link> </div>
     <h2>${total.toFixed(2)}</h2>
 
 

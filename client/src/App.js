@@ -16,6 +16,7 @@ import {CartProvider} from './context/cart'
 import SignUp from './Components/signup';
 import Signin from './Components/signin';
 import Homepage from './Components/homepage'
+import ShoppingCart from './Components/cart';
 
 
 
@@ -80,6 +81,7 @@ function App() {
           <Route path='/menu/:brand' component={Toolbar}/>
           <Route path='/signup' component={SignUp}/>
           <Route path="/signin"  component={Signin}/>
+          <Route path="/cart" component={ShoppingCart}/>
         </Switch>
         </div>
         <Footer/>

@@ -18,7 +18,6 @@ const initialState = {
     let updatedCart;
     let updatedItemIndex;
     
-console.log(state)
 
     switch (action.type) {
       case "ADD_SONG":
@@ -44,17 +43,52 @@ console.log(state)
         return {...state, cart: updatedCart};
      
       case "DEL_SONG":
-     const removeElements = _.filter(state.cart, obj => action.payload!==obj.id);
-    
-      return {
-            
-           cart: removeElements
-            
-          
-        };
+        updatedCart = [...state.cart];
+        updatedItemIndex = updatedCart.findIndex(
+            item => item.id === action.payload
+        );
+
+        updatedCart.splice(updatedItemIndex, 1);
+
+        return {...state, cart: updatedCart};
+
+        case "INCREMENT":
+          updatedCart = [...state.cart];
+          updatedItemIndex = updatedCart.findIndex(
+              item => item.id === action.payload
+          );
+
+          const incrementedItem = {
+              ...updatedCart[updatedItemIndex]
+          };
+
+          incrementedItem.quantity++;
+
+          updatedCart[updatedItemIndex] = incrementedItem;
+
+
+          return {...state, cart: updatedCart};
+
+          case "DECREMENT":
+            updatedCart = [...state.cart];
+            updatedItemIndex = updatedCart.findIndex(
+                item => item.id === action.payload
+            );
+
+            const decrementedItem = {
+                ...updatedCart[updatedItemIndex]
+            };
+
+            decrementedItem.quantity--;
+
+            updatedCart[updatedItemIndex] = decrementedItem;
+
+            return {...state, cart: updatedCart};
       
       default:
         throw new Error();
+
+       
     }
   };
 
@@ -68,13 +102,27 @@ console.log(state)
         );
         
       });
+
+      const increment = id =>{
+        dispatch({
+          type:"INCREMENT",
+          payload:id
+        });
+      };
+
+      const decrement = id =>{
+        dispatch({
+          type:"DECREMENT",
+          payload:id
+        })
+      }
     
       
 
       const deleteProduct = id => {
         
         dispatch({
-          type: "DEL_CART",
+          type: "DEL_SONG",
           payload: id
         });
       };
@@ -88,7 +136,7 @@ console.log(state)
       };
 
       return(
-        <CartContext.Provider value={{cart:state.cart,addCart,deleteProduct}}>
+        <CartContext.Provider value={{cart:state.cart,addCart,deleteProduct, increment,decrement}}>
             {props.children}
 
         </CartContext.Provider>

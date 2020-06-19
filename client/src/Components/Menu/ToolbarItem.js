@@ -54,7 +54,7 @@ function ToolbarItem(props){
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
-            {props.data.name}
+            {props.data.name}  <strong>${props.data.price}</strong>
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
             {props.data.description}
@@ -65,9 +65,7 @@ function ToolbarItem(props){
         <Button  onClick ={()=>addCart(props.data)} variant="contained" className={classes.orderButton}>
         <Typography variant="body2" color="primary" component="p"> Order</Typography>
         </Button>
-        <Button size="small" color="primary">
-          Learn More
-        </Button>
+        
       </CardActions>
     </Card>
     <div className={classes.toolbarMargin}/>
