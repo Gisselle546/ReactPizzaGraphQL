@@ -48,7 +48,7 @@ function Signin(props){
     const classes = useStyles();
     const[signin,setSignin] = useState(DEFAULT_SIGNIN);
     const [signinUser]= useMutation(SIGNIN_USER);
-    const {addToken} = useStore()
+    const {addToken,setUser} = useStore()
     
 
     function handleChange (event) {
@@ -93,8 +93,12 @@ function Signin(props){
       }catch(err){
            throw(err)
        } 
-       const {token}=response.data.signinUser
-       return token;
+       const {token}=response.data.signinUser;
+       
+       setUser(response.data.signinUser.user)
+       console.log(response.data.signinUser.user);
+       
+       return {token};
         
       
       }

@@ -52,7 +52,7 @@ function Signup (props){
     const classes = useStyles();
     const[signup,setSignup] = useState(DEFAULT_SIGNUP)
     const [signupUser]= useMutation(SIGNUP_USER);
-    const {addToken} = useStore()
+    const {addToken,setUser} = useStore()
 
    
     
@@ -99,8 +99,10 @@ function Signup (props){
          throw(err)
      } 
        const{token}=response.data.signupUser
+       setUser(response.data.signupUser.user);
        
-       return token;
+       
+       return {token, user:response.data.signupUser.user};
   
     }
   

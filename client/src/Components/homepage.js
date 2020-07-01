@@ -20,7 +20,8 @@ backgroundimage:{
     height:"80vh",
     backgroundSize:"cover",
     position:"relative",
-    width:"100%"
+    width:"100%",
+    
 },
 
 intro:{

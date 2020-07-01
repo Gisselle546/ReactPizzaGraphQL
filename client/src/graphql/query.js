@@ -47,3 +47,20 @@ query ($filter: String!){
 `;
 
 
+export const ME=gql`
+  query{
+    me{
+      id
+      name
+      email
+      address{
+        address
+        city
+        state
+      }
+    }
+}
+
+
+
+`;

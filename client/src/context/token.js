@@ -1,15 +1,16 @@
-import React, { createContext,useContext, useReducer,useEffect } from "react";
+import React, { createContext,useContext, useReducer,useEffect, useState } from "react";
 
  const AuthContext = createContext()
  
 const initialState={
-    token: JSON.parse(sessionStorage.getItem("token")) || ""
+    token: JSON.parse(sessionStorage.getItem("token")) || "",
+    
 }
 const reducer =(state,action)=>{
     switch(action.type){
         case "SIGNIN":
             return{
-                token:action.payload
+                token:action.payload.token
             };
             case "SIGNOUT":
               sessionStorage.clear();
@@ -26,8 +27,9 @@ const reducer =(state,action)=>{
 
  export const AuthProvider = props =>{
     const [state, dispatch] = useReducer(reducer, initialState);
-    
+    const [user, setUser] = useState();
 
+    console.log(user)
 
     useEffect(() => {
         sessionStorage.setItem(
@@ -60,7 +62,7 @@ const reducer =(state,action)=>{
      
      
      return(
-        <AuthContext.Provider value={{addToken, token:state.token, signout}}>
+        <AuthContext.Provider value={{addToken, token:state.token, signout,setUser,user}}>
             {props.children}
         </AuthContext.Provider>
         );

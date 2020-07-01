@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom';
 import AppBar from '@material-ui/core/AppBar';
 import ToolBar from '@material-ui/core/Toolbar';
 import TextField from '@material-ui/core/TextField';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import { makeStyles } from '@material-ui/core/styles';
@@ -21,6 +22,7 @@ const useStyles = makeStyles(theme=>({
     ...theme.mixins.toolbar,
     marginTop: '40px'
 },
+
 
 
     image: {
@@ -162,14 +164,14 @@ const useStyles = makeStyles(theme=>({
     const routes=[
       {
         name: "Menu",
-        activeIndex: 1,
+        activeIndex: 0,
         ariaOwns: anchorEl ? "simple-menu" : undefined,
         ariaPopup: anchorEl ? "true" : undefined,
         mouseOver: event => handleOpen(event)
       },
-      { name: "Deals", link: "/deals", activeIndex: 2 },
-      { name: "SignUp", link: "/signup", activeIndex: 3 },
-      { name: "SignIn", link: "/signin", activeIndex: 4 }
+      
+      { name: "SignUp", link: "/signup", activeIndex: 1 },
+      { name: "SignIn", link: "/signin", activeIndex: 2 }
     
     
     
@@ -210,14 +212,16 @@ const useStyles = makeStyles(theme=>({
     
    
     return (
-      <>
+     
+      <div className={classes.container}>
+      
        <AppBar position="fixed" color="primary">
         <ToolBar> 
         <img alt="pizza logo"  className={classes.image} style={{cursor:"pointer"}}src={Logo} onClick={()=>props.history.push('/')} />
         <Tabs value={value}  onChange={handleChange} className={classes.tabsContainer} indicatorColor="primary">
             
             <Tab className={classes.tab} component={Link} to='/menu' label={<div> Menu <ArrowDropDownIcon style={{verticalAlign: 'middle'}} /> </div>} aria-owns={anchorEl ? "simple-menu" : undefined} aria-haspopup={anchorEl ? "true" : undefined} onMouseOver={event => handleOpen(event)}/>
-            <Tab className={classes.tab} component={Link} to='/deals' label="Deals"/>,
+            
             
      
 
@@ -285,7 +289,9 @@ const useStyles = makeStyles(theme=>({
           </MenuItem>
         ))}
       </Menu>
-      </>
+      
+      </div>
+          
     );
   }
   

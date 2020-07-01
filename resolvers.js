@@ -2,11 +2,17 @@ const Product = require('./models/Product')
 const Category = require('./models/Category');
 const User = require('./models/User');
 const jwt = require('jsonwebtoken');
+const {getUserId} = require('./auth/util');
+const { addResolveFunctionsToSchema } = require('apollo-server');
+
+
 
  const signintoken = user =>{
     console.log(user)
     return jwt.sign({id:user._id},process.env.JWT_SECRET,{expiresIn:process.env.JWTEXP})
-}
+} 
+
+
 
 
 
@@ -41,14 +47,31 @@ Query:{
             catch(err){
                 throw err;
             }
-            
+          
 
 
         
          
            
     },
-    
+    me:async(_,args,context)=>{
+        
+        const data = getUserId(context.token);
+       
+        
+        try{
+            const user = await User.findById(data)
+            
+           
+           
+            return user;
+        
+        }catch(err){
+            throw new Error('ERR',err)
+        }
+        
+    }
+
 },
 
 
@@ -68,6 +91,22 @@ Product:{
 
 },
 
+User:{
+    address:async(parent)=>{
+        try{
+            let address;
+            if(parent.address!==undefined){
+                parent.address.map(item=>{
+                   address=item;
+                });
+                return address;
+            }
+        }catch(err){
+            throw err;
+        }
+    }
+},
+
 Mutation:{
     signinUser:async(_,args,context)=>{
         try{
@@ -82,19 +121,16 @@ Mutation:{
             return(new Error('Incorret email or password',401));
         }
         
-
         context.res.cookie("refreshcookie", jwt.sign({id:user._id},
-             process.env.REFRESH_SECRET,{expiresIn:process.env.JWTEXPREFREDJ}),{
-                 httpOnly:true
-             });
-        
-        
+            process.env.REFRESH_SECRET,{expiresIn:process.env.JWTEXPREFREDJ}),{
+                httpOnly:true
+            });
           
           const token = signintoken(user);
           
           
 
-          return{token}
+          return{token,user}
         }
         catch(err){
             throw (err);
@@ -119,12 +155,42 @@ Mutation:{
             await newUser.save();
             const token=signintoken(newUser);
            
-            return {token}
+            return {token,user:newUser}
         }
         catch(err){
             console.log(err)
         }
-    }
+    },
+
+   updateUser:async(_,args)=>{
+       try{
+            const options={
+                address:args.address.address,
+                city:args.address.city,
+                state:args.address.state
+            };
+
+            console.log(args)
+
+            const user = await User.findById(args.id);
+            user.address.push(options);
+            
+            await user.save();
+           console.log(user)
+            let useraddress
+            user.address.map(item=>{
+                useraddress={item}
+            })
+            
+            
+            return {id:user.id, address:options}
+        
+       }catch(err){
+           throw err;
+       }
+   }
+
+
 }
 
 

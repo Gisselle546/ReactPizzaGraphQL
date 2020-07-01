@@ -22,6 +22,8 @@ type Product{
 
 type Token {
     token: String!
+    user:User
+
 }
 
 input SignUpInput{
@@ -36,18 +38,31 @@ input SignInInput{
     password: String!
 }
 
+type Address{
+    address:String
+    city:String
+    state:String
+}
+
+input addressInput{
+    address:String
+    city:String
+    state:String
+}
+
 
 type User{
     id:ID
     name:String
-    email:String!
-    password:String!
-
+    email:String
+    address:Address
 }
+
 
 type Query{
     allFood:[Product]
     filterFood(filter:String):[Product]
+    me: User
 
    
 }
@@ -55,6 +70,12 @@ type Query{
 type Mutation{
     signupUser(input:SignUpInput):Token
     signinUser(input:SignInInput):Token
+    updateUser(id:ID,address:addressInput):User
+    
+   
+    
+    
+    
 }
 
 
