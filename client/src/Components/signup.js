@@ -28,7 +28,17 @@ const useStyles = makeStyles(theme=>({
             
             width: 270,
             
-        }
+        },
+        [theme.breakpoints.down('xs')]: {
+         
+          margin:" 0px",
+          padding:"50px",
+          left:"0%"
+           
+       }
+
+
+
     },
     button:{
         margin:"1rem 0.5rem"

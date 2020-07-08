@@ -5,14 +5,20 @@ import { makeStyles } from '@material-ui/core/styles';
 import {Link} from 'react-router-dom'
 
 const useStyles = makeStyles(theme=>({
-    root:{
-        
-    },
+   
     quantity:{
         borderRadius:"100px",
         backgroundColor:"#ce0018",
-        padding:"4px"
+        padding:"4px",
+       
 
+    },
+    total:{
+        [theme.breakpoints.down('xs')]: {
+         
+           display:"none"
+           
+        }
     }
    
 }));
@@ -29,8 +35,8 @@ function MiniHeader(){
 
 return(
     <>
-      <div> <div  className={classes.quantity}>{quantity}</div> <Link to="/cart"> <ShoppingCartIcon style={{verticalAlign: 'middle', size:"medium", color:"white" }} /></Link> </div>
-    <h2>${total.toFixed(2)}</h2>
+      <div> <div  className={classes.quantity}>{quantity}</div> <Link to="/cart"> <ShoppingCartIcon style={{verticalAlign: 'middle', size:"medium", color:"white",marginRight:"10px" }} /></Link> </div>
+    <h2 className={classes.total}>${total.toFixed(2)}</h2>
 
 
     </>

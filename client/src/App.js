@@ -92,10 +92,10 @@ function App() {
             }
           
           
-          />
+          /> 
           
-        </Switch>
-        </div>
+          </Switch>
+        </div> 
         <Footer/>
         </CartProvider>
        

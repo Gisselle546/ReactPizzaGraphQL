@@ -1,7 +1,7 @@
 import React from 'react';
 import pizzaLanding from '../assets/pizza.jpg'
 import Typography from '@material-ui/core/Typography';
-import {Grid,useMediaQuery} from '@material-ui/core';
+import {Grid} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import pizza from '../assets/MenuLinkItem/pizza.jpg';
@@ -21,6 +21,10 @@ backgroundimage:{
     backgroundSize:"cover",
     position:"relative",
     width:"100%",
+    [theme.breakpoints.down('sm')]: {
+         
+        backgroundPosition:"30% 60%"
+    }
     
 },
 
@@ -32,30 +36,68 @@ intro:{
     clipPath: "polygon(1% 9%, 77% 8%, 100% 95%, 22% 95%)",
     top:"44%",
     left:"60%",
-    boxShadow :"inset 0 0 10px #000000"
+    boxShadow :"inset 0 0 10px #000000",
+    [theme.breakpoints.down('xs')]: {
+         
+        
+        top:"50%",
+        left:"1%",
+        clipPath: "polygon(1% 1%, 89% 5%, 80% 92%, 15% 92%)",
+    }
+   
 },
 
 heading:{
     textAlign:'center',
+    [theme.breakpoints.down('xs')]: {
+         
+        
+        position:"relative"
+    }
    
 },
 
 price:{
     fontFamily:'Chelsea Market',
-    fontSize:'1.7rem'
+    fontSize:'1.7rem',
+    
 },
 
 landtite:{
 ...theme.typography.headerFont,
     fontSize:"2.3rem",
     fontFamily: 'Chelsea Market',
-    marginRight:'40px'
+    marginRight:'40px',
+    [theme.breakpoints.down('xs')]: {
+         
+        position:"absolute",
+        margin:"0px",
+        top:"20%",
+        left:"12%",
+        textAlign:"left"
+        
+        
+    }
+    
+
 },
+
+
+
+
+
+
 
 menuheaading:{
     fontFamily: 'Chelsea Market',
     textAlign:"center",
-    margin:"55px 0"
+    margin:"55px 0",
+    [theme.breakpoints.down('xs')]: {
+         
+        margin:"3px 0px"
+        
+        
+    }
 },
 
 
@@ -63,6 +105,12 @@ menu:{
     backgroundColor:"#400000",
     color:"#c40303",
     padding:"1rem",
+    [theme.breakpoints.down('xs')]: {
+         
+        padding:"2rem"
+        
+        
+    }
    
 },
 
@@ -80,7 +128,14 @@ menupics:{
     transition: "transform .2s",
     "&:hover": {
         transform: "scale(0.9)"
-      }
+      },
+      [theme.breakpoints.down('xs')]: {
+         
+        height:"15vh"
+        
+        
+    }
+
     
 },
 menuitems:{
@@ -92,7 +147,13 @@ menuitems:{
     fontFamily: 'Chelsea Market',
     "&:hover": {
         color: "#c40303"
-      }
+      },
+      [theme.breakpoints.down('xs')]: {
+         
+       fontSize:"1.9rem"
+        
+        
+    }
 },
 blank:{
     height:"300px"
@@ -105,13 +166,13 @@ function Homepage(){
             
     
     const classes = useStyles();
-  
-
+    
+   
     return(
         <>
         <div className={classes.backgroundimage}>
             <div className={classes.intro}>
-              <h3 className={classes.landtite}>   Margherita Pizza</h3>
+              <h3 className={classes.landtite}>   Margherita Pizza </h3>
               <div className={classes.heading}>
               <p className={classes.price}>$6</p>
               <Button variant="contained" size="large" color="primary" className={classes.margin}>Order Now</Button>

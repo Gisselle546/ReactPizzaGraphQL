@@ -20,7 +20,15 @@ const useStyles = makeStyles(theme=>({
     image:{
         height: 150,
         maxWidth:150,
-        marginTop:"0.4rem"
+        marginTop:"0.4rem",
+        [theme.breakpoints.down('xs')]: {
+         
+            width:"100px",
+            height:"100px"
+             
+             
+         }
+
     },
     buttonContainer:{
         marginTop:"4.5rem",
@@ -30,7 +38,14 @@ const useStyles = makeStyles(theme=>({
     },
     button:{
         width:"20px",
-        height:"25px"
+        height:"25px",
+        [theme.breakpoints.down('xs')]: {
+         
+            width:"15px",
+            height:"20px"
+             
+             
+         }
     },
     deletebutton:{
         backgroundColor:"#c40303",
@@ -44,6 +59,15 @@ const useStyles = makeStyles(theme=>({
     },
     total:{
         backgroundColor:"black"
+    },
+    price:{
+        [theme.breakpoints.down('xs')]: {
+         
+            margin:"0px 0px",
+            fontSize:"1.0rem"
+             
+             
+         }
     }
    
 }));
@@ -103,7 +127,7 @@ return(
           
         </Select>
         <Button className={classes.button} variant="contained" onClick={()=>increment(props.data.id)}color="primary">+</Button>
-        <div style={{marginLeft:"20px"}}><Typography variant="h5">${props.data.total}</Typography></div>
+        <div  style={{marginLeft:"20px"}}><Typography className={classes.price} variant="h5">${props.data.total}</Typography></div>
                
           
         </div>

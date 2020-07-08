@@ -13,14 +13,13 @@ const useStyles =  makeStyles(theme=>({
     fontSize:"15px",
     lineHeight:"24px",
     color:"#737373",
-    width:"100%"
+    width:"100%",
+    
    
     
    
   },
-  container:{
-    marginLeft:"20px"
-  },
+ 
   menu:{
     color:"#fff",
     fontSize:"16px",
@@ -40,8 +39,7 @@ const useStyles =  makeStyles(theme=>({
     
   },
   socialicons:{
-    paddingLeft:0,
-    marginBottom:0,
+   
     listStyle:"none"
   },
   icon:{
@@ -51,7 +49,7 @@ const useStyles =  makeStyles(theme=>({
     textTransform:"uppercase",
     color:"#96a2b2",
     fontWeight:"700",
-   fontSize:"13px"
+    fontSize:"13px"
 
 
   }
@@ -65,9 +63,9 @@ function Footer() {
    
   <hr className={classes.border}/>  
 
-  <Grid container className={classes.container}spacing={2}>
+  <Grid container spacing={0}>
   <Grid item xs={12} sm={6} md={8}>
-  <p >Copyright &copy; 2020 All Rights Reserved by <span>Pizza Palace</span>.</p>
+  <p style={{marginLeft:"20px"}}>Copyright &copy; 2020 All Rights Reserved by <span>Pizza Palace</span>.</p>
   </Grid>
 
   <Grid item xs={12} sm={6} md={4}>

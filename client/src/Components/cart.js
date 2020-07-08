@@ -10,7 +10,14 @@ import CartItems from './cartitems';
 
 const useStyles = makeStyles(theme=>({
     root:{
-        margin:"70px"
+        margin:"70px",
+        [theme.breakpoints.down('xs')]: {
+         
+            margin:" 1px",
+            padding:"0px"
+             
+             
+         }
 
     },
     heading:{

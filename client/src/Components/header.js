@@ -3,7 +3,6 @@ import { withRouter } from 'react-router-dom';
 import AppBar from '@material-ui/core/AppBar';
 import ToolBar from '@material-ui/core/Toolbar';
 import TextField from '@material-ui/core/TextField';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import { makeStyles } from '@material-ui/core/styles';
@@ -17,7 +16,8 @@ import MiniHeader from './miniheader';
 
 
 const useStyles = makeStyles(theme=>({
-    
+  
+
   toolbarMargin:{
     ...theme.mixins.toolbar,
     marginTop: '40px'
@@ -32,8 +32,14 @@ const useStyles = makeStyles(theme=>({
       },
       
       tabsContainer:{
-        marginLeft: 'auto',
-       
+        marginLeft: 'auto', 
+        
+        [theme.breakpoints.down('xs')]: {
+        
+          margin: "0px 0px"
+          
+      }
+
         
     },
 
@@ -45,7 +51,16 @@ const useStyles = makeStyles(theme=>({
         fontSize:"1rem",
         fontFamily:"oxygen",
         display: 'flex',
-        alignItems: 'center'
+        alignItems: 'center',
+        [theme.breakpoints.down('xs')]: {
+        
+          fontSize:"0.8rem"
+          
+      }
+
+        
+
+
         
     },
     miniToolbar:{
@@ -57,13 +72,26 @@ const useStyles = makeStyles(theme=>({
       justifyContent:"space-between",
       zIndex:"300",
       width:"40%",
-      right:"0"
+      right:"0",
+      [theme.breakpoints.down('xs')]: {
+        width: '100%',
+        position:"relative",
+        clipPath:"none",
+        padding:"0px 0px"
+          
+    },
+
     },
     textFied:{
       marginTop:"8px",
       color:"red",
       backgroundColor:"white",
-      marginLeft:"7.8rem"
+      marginLeft:"7.8rem",
+      [theme.breakpoints.down('xs')]: {
+        
+        margin:"16px 0"
+        
+    }
     },
 
     menu:{
@@ -212,11 +240,11 @@ const useStyles = makeStyles(theme=>({
     
    
     return (
-     
+    
       <div className={classes.container}>
       
        <AppBar position="fixed" color="primary">
-        <ToolBar> 
+        <ToolBar disableGutters={true}> 
         <img alt="pizza logo"  className={classes.image} style={{cursor:"pointer"}}src={Logo} onClick={()=>props.history.push('/')} />
         <Tabs value={value}  onChange={handleChange} className={classes.tabsContainer} indicatorColor="primary">
             
@@ -256,7 +284,7 @@ const useStyles = makeStyles(theme=>({
     color="secondary"
     className={classes.textFied}
   />
-  <MiniHeader/>
+  <MiniHeader />
  
      </ToolBar>
      <Menu
