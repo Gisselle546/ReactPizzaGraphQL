@@ -68,6 +68,9 @@ const useStyles = makeStyles(theme=>({
              
              
          }
+    },
+    toppings:{
+        marginBottom:"5px"
     }
    
 }));
@@ -98,6 +101,10 @@ return(
         <div className={classes.item}>
             <Typography variant="h5">{props.data.name}</Typography>
             <img className={ classes.image }alt="pizza" src={props.data.thumbnail}/>
+                <p>Toppings:({props.data.categorys.toppings.length})</p>
+                {props.data.categorys.toppings.map(data=>{
+                    return <div className={classes.toppings}>{data}</div> 
+                })}
             <Button className={classes.deletebutton}variant="contained" color="primary" onClick={()=>deleteProduct(props.data.id)}>Delete</Button>
         </div>
         <div className={classes.buttonContainer}>

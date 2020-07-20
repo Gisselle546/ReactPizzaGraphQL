@@ -12,7 +12,7 @@ import Header from './Components/header';
 import Toolbar from './Components/Menu/Toolbar';
 import Footer from './Components/footer';
 import {CartProvider} from './context/cart'
-
+import {useStore} from './context/token';
 import SignUp from './Components/signup';
 import Signin from './Components/signin';
 import Homepage from './Components/homepage'
@@ -22,7 +22,7 @@ import Checkout from './Components/checkout';
 function App() {
 
   
-  const isAuthenticated = sessionStorage.getItem('token');
+  
  
  
 
@@ -33,11 +33,12 @@ function App() {
 
   });
 
-  let token
-
+  
+  const {token} = useStore()
   const authLink = setContext((_, { headers }) => {
     
-    token = JSON.parse(isAuthenticated);
+   
+ console.log(token)
   
       
     return {
@@ -86,14 +87,15 @@ function App() {
           <Route path="/signin"  component={Signin}/>
           <Route path="/cart" component={ShoppingCart}/>
           <Route path='/checkout' 
-            render={props=>isAuthenticated!==''?
-              <Checkout/>:<Redirect to="/signin"/>
-            
+             render={props =>
+              token ? (
+                <Checkout props={props} />
+              ) : (
+                <Redirect to='/signin' />
+              )
             }
-          
-          
-          /> 
-          
+          />
+           
           </Switch>
         </div> 
         <Footer/>

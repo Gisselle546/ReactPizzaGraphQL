@@ -95,8 +95,7 @@ function Checkout(){
        )
         }
         if (error) {
-          return <div>Error</div>
-          
+          return console.dir(error)
         }
       
         

@@ -56,3 +56,14 @@ mutation updateUser($id:ID, $address:String,$city:String,$state:String){
 
 
 `;
+
+export const STRIPEPAYMENT=gql`
+mutation stripeCharge($id:ID,$amount:Float){
+    stripeCharge(input:{id:$id, amount:$amount}){
+        id
+        amount
+    }
+}
+
+
+`;

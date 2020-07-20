@@ -74,8 +74,8 @@ function Signin(props){
         event.preventDefault();
         try{
         const token = await signinHandler();
-        addToken(token);
-         
+        addToken(token)
+      
          
         }catch(err){
           

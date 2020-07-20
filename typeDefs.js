@@ -51,12 +51,23 @@ input addressInput{
 }
 
 
+type Stripe{
+    id:ID
+    amount: Float
+}
+
+input stripeInput{
+    id:ID
+    amount:Float
+}
+
 type User{
     id:ID
     name:String
     email:String
     address:Address
 }
+
 
 
 type Query{
@@ -71,7 +82,8 @@ type Mutation{
     signupUser(input:SignUpInput):Token
     signinUser(input:SignInInput):Token
     updateUser(id:ID,address:addressInput):User
-    
+    stripeCharge(input:stripeInput):Stripe
+  
    
     
     

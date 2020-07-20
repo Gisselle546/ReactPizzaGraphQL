@@ -11,7 +11,7 @@ const jwt = require('jsonwebtoken');
 const typeDefs = require('./typeDefs');
 const resolvers = require('./resolvers');
 const User = require('./models/User')
-const stripe = require('stripe')(process.env.STRIPE_SECRET);
+
 
 
 app.use( cors({origin:"http://localhost:3000",credentials:true}) );
@@ -19,10 +19,7 @@ app.use('/refreshtoken', cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
 
-app.use( cors({
-  origin:"http://localhost:3000",
-  credentials:true
-}) );
+;
 
 
  app.post("/refreshtoken", async (req,res)=>{

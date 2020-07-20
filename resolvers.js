@@ -3,7 +3,7 @@ const Category = require('./models/Category');
 const User = require('./models/User');
 const jwt = require('jsonwebtoken');
 const {getUserId} = require('./auth/util');
-const { addResolveFunctionsToSchema } = require('apollo-server');
+const stripe = require("stripe")(process.env.STRIPESECRET);
 
 
 
@@ -188,8 +188,27 @@ Mutation:{
        }catch(err){
            throw err;
        }
-   }
+   },
+  stripeCharge:async(_,args)=>{
+      const {id,amount}=args.input;
+    try{
+        console.log(args)
+        const payment = await stripe.paymentIntents.create({
+            amount,
+            currency: "usd",
+            payment_method:id,
+            confirm:true
+          });
+          
+           
 
+          return{id,amount}
+    }catch(err){
+        throw err;
+    }
+
+
+  }
 
 }
 
