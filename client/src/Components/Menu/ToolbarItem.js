@@ -75,7 +75,7 @@ const handleChangeVeggies = (event) => {
 
 const { pepperoni, sausage, bacon} = meat;
 const {bananapeppers,pineapple,onions,greenpeppers}= veggies;
-
+const {brand}=props.data.categorys;
 console.log(props.data)
 
   const handleChange = (event) => {
@@ -105,8 +105,9 @@ console.log(props.data)
     }
 
 
-   
+   console.log(brand)
     return(
+      
       
        <div className={classes.container}>
          <Dialog className={classes.modal} open={modal} close={closeDialog}>
@@ -191,10 +192,10 @@ console.log(props.data)
         <Button  onClick ={()=>addCart(props.data)} variant="contained" className={classes.orderButton}>
         <Typography variant="body2" color="primary" component="p"> Order</Typography>
         </Button>
-        <Button  onClick={()=>{showModal(true)}} variant="contained" className={classes.orderButton}>
+        {brand==='pizza'&&<Button  onClick={()=>{showModal(true)}} variant="contained" className={classes.orderButton}>
         <Typography variant="body2" color="primary" component="p"> Customize</Typography>
         </Button>
-        
+        }
       </CardActions>
     </Card>
     <div className={classes.toolbarMargin}/>

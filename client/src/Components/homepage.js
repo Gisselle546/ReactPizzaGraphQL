@@ -162,7 +162,7 @@ blank:{
 
   }));
 
-function Homepage(){
+function Homepage(props){
             
     
     const classes = useStyles();
@@ -175,7 +175,7 @@ function Homepage(){
               <h3 className={classes.landtite}>   Margherita Pizza </h3>
               <div className={classes.heading}>
               <p className={classes.price}>$6</p>
-              <Button variant="contained" size="large" color="primary" className={classes.margin}>Order Now</Button>
+              <Button onClick={()=>props.history.push("/menu/pizza")}variant="contained" size="large" color="primary" className={classes.margin}>Order Now</Button>
               </div>
             </div>
         </div>
