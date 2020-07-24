@@ -8,7 +8,7 @@ import { useStore } from '../context/token';
 
 const useStyles = makeStyles(theme=>({
     root:{
-        backgroundColor:"#ff0000",
+        backgroundColor:"#8a211e",
         height:"270px",
         padding:"50px",
        
@@ -57,7 +57,7 @@ const DEFAULT_SIGNIN={
 function Signin(props){
     const classes = useStyles();
     const[signin,setSignin] = useState(DEFAULT_SIGNIN);
-    const [signinUser]= useMutation(SIGNIN_USER);
+    const [signinUser,{error}]= useMutation(SIGNIN_USER);
     const {addToken,setUser} = useStore()
     
 
@@ -69,20 +69,24 @@ function Signin(props){
         })); 
       }
 
+      function handleError(field){
+        return error&& field===""
+      }
+
 
       async function submitHandle(event){
         event.preventDefault();
         try{
         const token = await signinHandler();
         addToken(token)
-      
+        props.history.push("/menu/pizza")
          
         }catch(err){
           
-          throw err;
+          console.dir(error)
         }
        
-        props.history.push("/menu/pizza")
+       
       }
 
        async function signinHandler(){
@@ -119,7 +123,7 @@ function Signin(props){
           
           <div>
             
-            <TextField label="Email" name="email" onChange={handleChange} />
+            <TextField label="Email" name="email" onChange={handleChange} helperText={error&&error.graphQLErrors[0].message&&' cannot be empty'} error={handleError(signin.email)}/>
           </div>
           <div>
            
@@ -128,9 +132,9 @@ function Signin(props){
               id="outlined-size-normal"
               onChange={handleChange}
               type="password"
-              
+              helperText={error&&error.graphQLErrors[0].message&&' cannot be empty'}
               name="password"
-              
+              error={handleError(signin.password)}
              
             />
           </div>

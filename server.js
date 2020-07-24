@@ -1,5 +1,5 @@
 const express = require('express');
-const { ApolloServer } = require('apollo-server-express');
+const { ApolloServer, AuthenticationError} = require('apollo-server-express');
 const cors = require( `cors` );
 const app = express();
 const bodyParser = require('body-parser');

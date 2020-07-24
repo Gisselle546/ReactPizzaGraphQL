@@ -9,7 +9,7 @@ import { useStore } from '../context/token';
 
 const useStyles = makeStyles(theme=>({
     root:{
-        backgroundColor:"#ff0000",
+        backgroundColor:"	#8a211e",
         height:"270px",
         padding:"50px",
        
@@ -19,7 +19,7 @@ const useStyles = makeStyles(theme=>({
         left:"38%",
         justifyContent: 'center',
         
-        
+
         
         
         '& .MuiTextField-root': {
@@ -29,13 +29,22 @@ const useStyles = makeStyles(theme=>({
             width: 270,
             
         },
+
+        
+
+
+
         [theme.breakpoints.down('xs')]: {
          
           margin:" 0px",
           padding:"50px",
           left:"0%"
            
-       }
+       },
+
+       field:{
+        color:"#000"
+       },
 
 
 
@@ -61,12 +70,14 @@ function Signup (props){
 
     const classes = useStyles();
     const[signup,setSignup] = useState(DEFAULT_SIGNUP)
-    const [signupUser]= useMutation(SIGNUP_USER);
+    const [signupUser,{error}]= useMutation(SIGNUP_USER);
     const {addToken,setUser} = useStore()
+  
+   function handleError(field){
+     return error&& field===""
+   }
 
-   
-    
-    
+  
 
     function handleChange (event) {
         const{name,value}=event.target;
@@ -76,19 +87,20 @@ function Signup (props){
         })); 
       }
 
+
       async function submitHandle(event){
         event.preventDefault();
         
         try{
         const token = await signupHandler();
         addToken(token);
-    
-        }catch(err){
+        props.history.push("/menu/pizza")
+
+        }catch(error){
           
-          throw err;
+          console.dir(error)
         }
        
-        props.history.push("/menu/pizza")
       }
 
 
@@ -105,8 +117,8 @@ function Signup (props){
             password
       }})
       
-    }catch(err){
-         throw(err)
+    }catch(error){
+      throw (error);
      } 
        const{token}=response.data.signupUser
        setUser(response.data.signupUser.user);
@@ -117,25 +129,27 @@ function Signup (props){
     }
   
 return(
-    <form className={classes.root} onSubmit={event=>submitHandle(event)} noValidate autoComplete="off">
+    <form className={classes.root} onSubmit={event=>submitHandle(event)} autoComplete="off">
       <div>
         
-        <TextField label="Name" name="name" onChange={handleChange}/>
+        <TextField className={classes.field}label="Name" name="name" value={signup.name}onChange={handleChange} error={handleError(signup.name)} helperText={error&&' cannot be empty'}/>
       </div>
       <div>
         
-        <TextField label="Email" name="email" onChange={handleChange} />
+        <TextField className={classes.field} label="Email" name="email" value={signup.email}onChange={handleChange} error={handleError(signup.email)} helperText={error&&error.graphQLErrors[0].message&&' cannot be empty'}/>
       </div>
       <div>
        
         <TextField
           label="Password"
+          className={classes.field}
+          value={signup.password}
           id="outlined-size-normal"
           onChange={handleChange}
           type="password"
-          
           name="password"
-          
+          error={handleError(signup.password)}
+          helperText={error&&' cannot be empty'}
          
         />
       </div>

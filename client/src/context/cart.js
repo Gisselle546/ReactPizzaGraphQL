@@ -1,5 +1,5 @@
 import React, { useReducer, createContext,useContext,useEffect } from "react";
-import _ from 'lodash';
+
 
 
 
@@ -86,6 +86,12 @@ const initialState = {
             updatedCart[updatedItemIndex] = decrementedItem;
 
             return {...state, cart: updatedCart};
+
+            case "DeleteALL":
+              const deleteCart = [];
+
+              return {cart:deleteCart};
+
       
       default:
         throw new Error();
@@ -137,8 +143,14 @@ const initialState = {
         });
       };
 
+      const deleteCart=()=>{
+        dispatch({
+          type:"DeleteALL"
+        })
+      }
+
       return(
-        <CartContext.Provider value={{cart:state.cart,addCart,deleteProduct, increment,decrement}}>
+        <CartContext.Provider value={{cart:state.cart,addCart,deleteProduct, increment,decrement,deleteCart}}>
             {props.children}
 
         </CartContext.Provider>

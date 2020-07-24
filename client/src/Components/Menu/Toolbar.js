@@ -51,7 +51,7 @@ function Toolbar(props){
         
       }
     
-      console.log(data)
+     
 
      
      

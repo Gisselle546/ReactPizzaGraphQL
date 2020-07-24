@@ -126,8 +126,9 @@ const useStyles = makeStyles(theme=>({
     
   
     
-    
+   
 
+    
     const handleChange = (event, newValue) => {
       setValue(newValue);
     };
@@ -148,7 +149,7 @@ const useStyles = makeStyles(theme=>({
       setOpenMenu(false);
     }
   
-   
+  
     
     const menuList =[
       {
@@ -283,6 +284,9 @@ const useStyles = makeStyles(theme=>({
     variant="outlined"
     color="secondary"
     className={classes.textFied}
+    
+    
+    
   />
   <MiniHeader />
  

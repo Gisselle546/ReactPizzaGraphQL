@@ -4,7 +4,7 @@ const User = require('./models/User');
 const jwt = require('jsonwebtoken');
 const {getUserId} = require('./auth/util');
 const stripe = require("stripe")(process.env.STRIPESECRET);
-
+const { AuthenticationError, UserInputError } = require('apollo-server'); 
 
 
  const signintoken = user =>{
@@ -109,7 +109,7 @@ User:{
 
 Mutation:{
     signinUser:async(_,args,context)=>{
-        try{
+       
         
         const email= args.input.email;
         const password = args.input.password;
@@ -118,7 +118,7 @@ Mutation:{
         
 
         if(!user||!(await user.comparepasswords(password,user.password))) {
-            return(new Error('Incorret email or password',401));
+            throw new AuthenticationError('Incorrect email or password',401);
         }
         
         context.res.cookie("refreshcookie", jwt.sign({id:user._id},
@@ -131,19 +131,17 @@ Mutation:{
           
 
           return{token,user}
-        }
-        catch(err){
-            throw (err);
-        }
+        
+       
 
     },
 
     signupUser: async(_,args)=>{
-        try{
+        
             const email= args.input.email;
             const user = await User.findOne({email})
             if(user){
-                throw new Error("email in use")
+              throw new UserInputError("Email in use",401);
             }
             const newUser = new User({
                 name: args.input.name,
@@ -156,10 +154,8 @@ Mutation:{
             const token=signintoken(newUser);
            
             return {token,user:newUser}
-        }
-        catch(err){
-            console.log(err)
-        }
+        
+      
     },
 
    updateUser:async(_,args)=>{
