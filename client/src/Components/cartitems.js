@@ -93,8 +93,7 @@ const handleClose = () => {
     setOpen(true);
   };
 
-  console.log(props)
-
+  
 return(
    
     <div className={classes.root}>

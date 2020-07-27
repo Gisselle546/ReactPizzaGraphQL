@@ -58,17 +58,13 @@ Query:{
         
         const data = getUserId(context.token);
        
-        
-        try{
             const user = await User.findById(data)
             
            
            
             return user;
         
-        }catch(err){
-            throw new Error('ERR',err)
-        }
+       
         
     }
 
@@ -80,31 +76,33 @@ Query:{
 Product:{
     categorys: async(parent)=>{
        
-        try{
+       
       const getCategory = await Category.findById(parent.category)
       
       return getCategory;
-        }catch(err){
-            throw err;
-        }
+      
     }
 
 },
 
 User:{
     address:async(parent)=>{
-        try{
-            let address;
-            if(parent.address!==undefined){
-                parent.address.map(item=>{
-                   address=item;
-                });
-                return address;
+            
+           let address;
+
+           if(parent.address.length===0){
+               return [];
+           }
+           else if(parent.address.length>0){
+               const useraddress = await User.findById(parent.id);
+                return useraddress.address;
+            
+           }
+             
+           return [parent.address];
             }
-        }catch(err){
-            throw err;
-        }
-    }
+        
+    
 },
 
 Mutation:{
@@ -149,7 +147,7 @@ Mutation:{
                 email
                 
             })
-            
+            newUser.address=[];
             await newUser.save();
             const token=signintoken(newUser);
            
@@ -159,31 +157,30 @@ Mutation:{
     },
 
    updateUser:async(_,args)=>{
-       try{
+       
             const options={
                 address:args.address.address,
                 city:args.address.city,
                 state:args.address.state
             };
 
-            console.log(args)
+            
 
             const user = await User.findById(args.id);
+           
             user.address.push(options);
             
             await user.save();
-           console.log(user)
-            let useraddress
-            user.address.map(item=>{
-                useraddress={item}
-            })
+           
+           
             
             
+            
+            
+           
             return {id:user.id, address:options}
         
-       }catch(err){
-           throw err;
-       }
+      
    },
   stripeCharge:async(_,args)=>{
       const {id,amount}=args.input;

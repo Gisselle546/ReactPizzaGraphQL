@@ -65,7 +65,7 @@ type User{
     id:ID
     name:String
     email:String
-    address:Address
+    address:[Address!]
 }
 
 

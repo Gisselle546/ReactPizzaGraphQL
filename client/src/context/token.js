@@ -29,7 +29,7 @@ const reducer =(state,action)=>{
     const [state, dispatch] = useReducer(reducer, initialState);
     const [user, setUser] = useState();
 
-    console.log(user)
+    
 
     useEffect(() => {
         sessionStorage.setItem(

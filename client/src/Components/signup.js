@@ -120,6 +120,7 @@ function Signup (props){
     }catch(error){
       throw (error);
      } 
+     
        const{token}=response.data.signupUser
        setUser(response.data.signupUser.user);
        

@@ -38,7 +38,10 @@ function Checkout(){
     const[updateUser] = useMutation(ADDADDRESS);
     const [modal,showModal]=useState(false)
     const[checkout,setCheckout] = useState(DEFAULT_CHECKOUT)
-    const {data,loading,error} = useQuery(ME);
+    const {data,loading,error, refetch } = useQuery(ME);
+
+
+  console.log(user);
 
     function closeDialog(){
       showModal(false)
@@ -61,6 +64,7 @@ function Checkout(){
 
       const{address,city,state}=checkout
       
+      
       let response;
       try{
             response = await updateUser({
@@ -69,16 +73,24 @@ function Checkout(){
               address,
               city,
               state
-        }})
+        }});
+       
+       
         
       }catch(err){
-           throw(err)
+           console.log(err)
        } 
+       
+
+      
+         console.log(response.data.address);
+
+       const newuser ={...user};
+       newuser.address.push(response.data.updateUser.address);
+       
+        setUser(newuser)
          
-       const newuser ={...user,...response.data.updateUser.address};
-       setUser(newuser)
-         
-    
+        return newuser;
       }
 
       if (loading) {
@@ -100,7 +112,7 @@ function Checkout(){
       
         
       
-      
+      console.log(data.me.address)
       
     return(
        
@@ -109,8 +121,8 @@ function Checkout(){
 
     
       
-      
-          {(data.me.address===null)?(
+    
+          {(data.me.address.length===0)?(
 
     
     <div className={classes.container}>

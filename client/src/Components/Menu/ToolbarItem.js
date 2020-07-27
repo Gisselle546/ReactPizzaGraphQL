@@ -76,7 +76,7 @@ const handleChangeVeggies = (event) => {
 const { pepperoni, sausage, bacon} = meat;
 const {bananapeppers,pineapple,onions,greenpeppers}= veggies;
 const {brand}=props.data.categorys;
-console.log(props.data)
+
 
   const handleChange = (event) => {
     setValue(event.target.value);
@@ -105,7 +105,7 @@ console.log(props.data)
     }
 
 
-   console.log(brand)
+   
     return(
       
       
