@@ -28,7 +28,7 @@ const reducer =(state,action)=>{
  export const AuthProvider = props =>{
     const [state, dispatch] = useReducer(reducer, initialState);
     const [user, setUser] = useState();
-
+    
     
 
     useEffect(() => {
@@ -57,8 +57,7 @@ const reducer =(state,action)=>{
      
      }
    
-     
-     
+    
      
      
      return(

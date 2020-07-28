@@ -6,7 +6,8 @@ import {ApolloProvider} from '@apollo/react-hooks';
 import {BrowserRouter, Route,Switch,Redirect} from 'react-router-dom';
 import {ThemeProvider} from '@material-ui/styles';
 import { setContext } from 'apollo-link-context';
-
+import { onError } from 'apollo-link-error';
+import { ApolloLink} from 'apollo-link';
 import theme from './UI/Theme';
 import Header from './Components/header';
 import Toolbar from './Components/Menu/Toolbar';
@@ -35,6 +36,8 @@ function App() {
 
   
   const {token} = useStore()
+  
+  
   const authLink = setContext((_, { headers }) => {
     
    
@@ -49,7 +52,27 @@ function App() {
     };
   });
 
+  const errorLink = onError(({ graphQLErrors, networkError }) => {
+    if (graphQLErrors) {
+      graphQLErrors.forEach(({ message, locations, path }) => {
+        console.log('GraphQL error', message);
+  
+        if (message === 'jwt expired') {
+          sessionStorage.clear();
+        }
+      });
+    }
+  
+    if (networkError) {
+      console.log('Network error', networkError);
+  
+      if (networkError.statusCode === 401) {
+        sessionStorage.clear();
+      }
+    }
+  });
 
+  const link = ApolloLink.from([authLink, httpLink,errorLink]); 
    
    
   
@@ -58,7 +81,7 @@ function App() {
   
   
   const client = new ApolloClient({
-    link:authLink.concat(httpLink),
+    link,
     cache: new InMemoryCache(),
     
     

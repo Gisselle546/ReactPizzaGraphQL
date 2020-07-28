@@ -13,6 +13,7 @@ import {Link} from 'react-router-dom';
 import Logo from '../assets/pizzapalacelogo.png';
 import {useStore} from '../context/token';
 import MiniHeader from './miniheader';
+import { Button } from '@material-ui/core';
 
 
 const useStyles = makeStyles(theme=>({
@@ -114,6 +115,11 @@ const useStyles = makeStyles(theme=>({
 
   }));
 
+const NOCODE=''
+
+
+
+
   function Header(props) {
     
    
@@ -124,9 +130,8 @@ const useStyles = makeStyles(theme=>({
     const [selectedIndex, setSelectedIndex] = useState(0);
     const {token,signout} = useStore();
     
-  
     
-   
+  
 
     
     const handleChange = (event, newValue) => {
@@ -243,7 +248,7 @@ const useStyles = makeStyles(theme=>({
     return (
     
       <div className={classes.container}>
-      
+     
        <AppBar position="fixed" color="primary">
         <ToolBar disableGutters={true}> 
         <img alt="pizza logo"  className={classes.image} style={{cursor:"pointer"}}src={Logo} onClick={()=>props.history.push('/')} />
@@ -278,16 +283,8 @@ const useStyles = makeStyles(theme=>({
        </AppBar>
        <div className={classes.toolbarMargin}/>
      <ToolBar className={classes.miniToolbar}>
-     <TextField
-    id="outlined-secondary"
-    label="Promo Code"
-    variant="outlined"
-    color="secondary"
-    className={classes.textFied}
-    
-    
-    
-  />
+      
+  
   <MiniHeader />
  
      </ToolBar>
