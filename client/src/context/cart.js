@@ -26,6 +26,7 @@ const initialState = {
         
        
         updatedCart = [...state.cart];
+        
         updatedItemIndex = updatedCart.findIndex(item => item.id === action.payload.id);
         
 
@@ -38,7 +39,7 @@ const initialState = {
             };
             
             updatedItem.quantity++;
-            updatedItem.total=updatedItem.price*updatedItem.quantity
+            updatedItem.total=(updatedItem.price*updatedItem.quantity)
             updatedCart[updatedItemIndex] = updatedItem;
         }
 
