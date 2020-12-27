@@ -9,6 +9,7 @@ const initialState={
 const reducer =(state,action)=>{
     switch(action.type){
         case "SIGNIN":
+          console.log(action.payload)
             return{
                 token:action.payload.token
             };
