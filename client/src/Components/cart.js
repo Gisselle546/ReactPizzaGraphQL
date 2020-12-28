@@ -66,7 +66,7 @@ function tax(total){
 
 
 function completeTotal(total){
- return parseFloat(tax(total.toFixed(2)))+parseFloat(4.00)+parseFloat(total.toFixed(2));
+ return parseFloat(tax(total.toFixed(2)*quantity))+parseFloat(4.00)+parseFloat(total.toFixed(2));
 }
 
 
