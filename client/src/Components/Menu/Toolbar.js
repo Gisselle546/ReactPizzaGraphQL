@@ -32,6 +32,8 @@ function Toolbar(props){
       }
     })
     
+    console.log(datar);
+    
     
     if (loading||load) {
       return(

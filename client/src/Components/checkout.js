@@ -38,7 +38,7 @@ function Checkout(){
     const[updateUser] = useMutation(ADDADDRESS);
     const [modal,showModal]=useState(false)
     const[checkout,setCheckout] = useState(DEFAULT_CHECKOUT)
-    const {data,loading,error, refetch } = useQuery(ME);
+    const {data,loading,error } = useQuery(ME);
 
 
   console.log(user);

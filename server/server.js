@@ -19,7 +19,7 @@ app.use('/refreshtoken', cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
 
-;
+
 
 
  app.post("/refreshtoken", async (req,res)=>{
