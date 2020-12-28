@@ -98,12 +98,12 @@ function completeTotal(subtotal){
        <Button disabled={!cart.length} size="large" endIcon={<ArrowForwardIcon/>} component={Link} to="/checkout"className={classes.checkoutbutton}>
           Checkout
         </Button>
-                <Typography variant="h6">Subtotal: ${subtotal.toFixed(2)*quantity}</Typography>
+                <Typography variant="h6">Subtotal: ${subtotal.toFixed(2)}</Typography>
                 {(total)?<Typography variant="h6">Delivery Fee: $4.00</Typography>:<Typography variant="h6">Delivery Fee: $0.00</Typography>}
                 
                 <Typography variant="h6">Tax: ${tax(total)}</Typography>
                 {(total)?
-                <Typography variant="h6"><em>Total: ${completeTotal(total)}</em></Typography>:<Typography variant="h6"><em>Total: $0.00</em></Typography>
+                <Typography variant="h6"><em>Total: ${completeTotal(subtotal)}</em></Typography>:<Typography variant="h6"><em>Total: $0.00</em></Typography>
                  }
 
     </Paper>
