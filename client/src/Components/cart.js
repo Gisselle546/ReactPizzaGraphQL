@@ -58,15 +58,16 @@ function ShoppingCart(){
     const total=cart.reduce((prev, cur) => prev + cur.total, 0);
     const quantity= cart.reduce((prev, cur) => prev + cur.quantity, 0);
    
+    const subtotal=total*quantity
 
-function tax(total){
-     const fee=total*0.07
+function tax(subtotal){
+     const fee=subtotal*0.07
      return fee.toFixed(2)
 }
 
 
-function completeTotal(total){
- return parseFloat(tax(total.toFixed(2)*quantity))+parseFloat(4.00)+parseFloat(total.toFixed(2));
+function completeTotal(subtotal){
+ return parseFloat(tax(subtotal.toFixed(2)))+parseFloat(4.00)+parseFloat(subtotal.toFixed(2));
 }
 
 
@@ -97,7 +98,7 @@ function completeTotal(total){
        <Button disabled={!cart.length} size="large" endIcon={<ArrowForwardIcon/>} component={Link} to="/checkout"className={classes.checkoutbutton}>
           Checkout
         </Button>
-                <Typography variant="h6">Subtotal: ${total.toFixed(2)*quantity}</Typography>
+                <Typography variant="h6">Subtotal: ${subtotal.toFixed(2)*quantity}</Typography>
                 {(total)?<Typography variant="h6">Delivery Fee: $4.00</Typography>:<Typography variant="h6">Delivery Fee: $0.00</Typography>}
                 
                 <Typography variant="h6">Tax: ${tax(total)}</Typography>
