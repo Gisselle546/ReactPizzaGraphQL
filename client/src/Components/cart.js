@@ -101,7 +101,7 @@ function completeTotal(subtotal){
                 <Typography variant="h6">Subtotal: ${subtotal.toFixed(2)}</Typography>
                 {(total)?<Typography variant="h6">Delivery Fee: $4.00</Typography>:<Typography variant="h6">Delivery Fee: $0.00</Typography>}
                 
-                <Typography variant="h6">Tax: ${tax(total)}</Typography>
+                <Typography variant="h6">Tax: ${tax(subtotal)}</Typography>
                 {(total)?
                 <Typography variant="h6"><em>Total: ${completeTotal(subtotal)}</em></Typography>:<Typography variant="h6"><em>Total: $0.00</em></Typography>
                  }
