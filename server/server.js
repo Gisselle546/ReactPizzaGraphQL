@@ -14,7 +14,7 @@ const User = require('./models/User')
 
 
 
-app.use( cors({origin:"http://localhost:3000",credentials:true}) );
+app.use( cors({origin:"https://pizzapalace233.netlify.app",credentials:true}) );
 app.use('/refreshtoken', cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));

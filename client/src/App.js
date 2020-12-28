@@ -28,7 +28,7 @@ function App() {
  
 
   const httpLink = new HttpLink({
-    uri: 'https://pizzapalace323.herokuapp.com/',
+    uri: 'https://pizzapalace323.herokuapp.com/graphql',
     credentials: 'include',
     
 
