@@ -60,13 +60,13 @@ function ShoppingCart(){
    
 
 function tax(total){
-     const fee=total*0.07
+     const fee=total*0.07*quantity
      return fee.toFixed(2)
 }
 
 
 function completeTotal(total){
- return parseFloat(tax(total.toFixed(2)*quantity))+parseFloat(4.00)+parseFloat(total.toFixed(2));
+ return parseFloat(tax(total.toFixed(2)))+parseFloat(4.00)+parseFloat(total.toFixed(2));
 }
 
 
