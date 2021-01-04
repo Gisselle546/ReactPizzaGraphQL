@@ -1,5 +1,5 @@
 import React,{useState} from 'react';
-
+import CustomDialog from '../dialog';
 import { useStore } from '../../context/cart';
 import {Card,CardActionArea,CardActions,CardContent,CardMedia,Button,Typography,Dialog,DialogActions,DialogContent,DialogTitle,FormControl,FormControlLabel,RadioGroup,Radio,
   FormLabel,Checkbox,FormGroup} from '@material-ui/core';
@@ -49,6 +49,7 @@ function ToolbarItem(props){
     const classes = useStyles();
     const {addCart} = useStore();
     const [modal,showModal]=useState(false);
+    const [cartmodal,showCartModal]= useState(false);
 
 
 const [value, setValue] = useState('normal');
@@ -199,6 +200,7 @@ const {brand}=props.data.categorys;
       </CardActions>
     </Card>
     <div className={classes.toolbarMargin}/>
+    <CustomDialog title='Great Choice!!' open={cartmodal} content={props.data} onCloseModal={closeDialog}/>
 </div>
 
 
