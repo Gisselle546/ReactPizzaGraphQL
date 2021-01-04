@@ -10,7 +10,7 @@ function CustomDialog(props) {
 return(
     <Dialog open={props.open} close={props.onCloseModal}>
           <DialogTitle>{props.title}</DialogTitle>
-          <DialogContent > <img src={props.content}/></DialogContent>
+          <DialogContent > <img height="400px" width="400px" src={props.content}/> </DialogContent>
           <DialogActions> <Button onClick={props.onCloseModal} color="primary">Close</Button></DialogActions>
 
     </Dialog>
