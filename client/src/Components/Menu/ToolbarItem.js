@@ -105,6 +105,10 @@ const {brand}=props.data.categorys;
         
     }
 
+    function cartHandler(){
+      addCart(props.data);
+      showCartModal(true);
+    }
 
    
     return(
@@ -190,7 +194,7 @@ const {brand}=props.data.categorys;
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button  onClick ={()=>addCart(props.data)} variant="contained" className={classes.orderButton}>
+        <Button  onClick ={cartHandler} variant="contained" className={classes.orderButton}>
         <Typography variant="body2" color="primary" component="p"> Order</Typography>
         </Button>
         {brand==='pizza'&&<Button  onClick={()=>{showModal(true)}} variant="contained" className={classes.orderButton}>
