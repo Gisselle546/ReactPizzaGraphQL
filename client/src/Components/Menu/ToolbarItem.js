@@ -1,6 +1,7 @@
 import React,{useState} from 'react';
 import CustomDialog from '../dialog';
 import { useStore } from '../../context/cart';
+import {withRouter} from 'react-router-dom';
 import {Card,CardActionArea,CardActions,CardContent,CardMedia,Button,Typography,Dialog,DialogActions,DialogContent,DialogTitle,FormControl,FormControlLabel,RadioGroup,Radio,
   FormLabel,Checkbox,FormGroup} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
@@ -213,4 +214,4 @@ const {brand}=props.data.categorys;
     );
 }
 
-export default ToolbarItem;
+export default withRouter(ToolbarItem);
