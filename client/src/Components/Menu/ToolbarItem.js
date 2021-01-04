@@ -101,7 +101,7 @@ const {brand}=props.data.categorys;
        topps.categorys.toppings=newArry;
       await addCart(topps);
        showModal(false);
-       
+       props.history.push('/cart')
        
         
     }
