@@ -204,7 +204,7 @@ const {brand}=props.data.categorys;
       </CardActions>
     </Card>
     <div className={classes.toolbarMargin}/>
-    <CustomDialog title='Great Choice!!' open={cartmodal} content='added to cart' onCloseModal={closeDialog}/>
+    <CustomDialog title='Great Choice!!' open={cartmodal} content={`${props.data.thumbnail}`} onCloseModal={closeDialog}/>
 </div>
 
 
