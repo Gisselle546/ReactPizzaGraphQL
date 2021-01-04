@@ -103,7 +103,7 @@ function completeTotal(subtotal){
                 
                 <Typography variant="h6">Tax: ${tax(subtotal)}</Typography>
                 {(total)?
-                <Typography variant="h6"><em>Total: ${completeTotal(subtotal)}</em></Typography>:<Typography variant="h6"><em>Total: $0.00</em></Typography>
+                <Typography variant="h6"><em>Total: ${completeTotal(subtotal).toPrecision(4)}</em></Typography>:<Typography variant="h6"><em>Total: $0.00</em></Typography>
                  }
 
     </Paper>
