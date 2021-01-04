@@ -85,7 +85,8 @@ const {brand}=props.data.categorys;
 
     
     function closeDialog(){
-      showModal(false)
+      showModal(false);
+      showCartModal(false);
     }
 
      async function handleAddCustomization(){
@@ -204,7 +205,7 @@ const {brand}=props.data.categorys;
       </CardActions>
     </Card>
     <div className={classes.toolbarMargin}/>
-    <CustomDialog title='Great Choice!!' open={cartmodal} content={props.data.thumbnail} onCloseModal={closeDialog}/>
+    <CustomDialog title='Added to Cart!!' open={cartmodal} content={props.data.thumbnail} onCloseModal={closeDialog}/>
 </div>
 
 
